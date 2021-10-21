@@ -1,0 +1,126 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"machine.openshift.io/v1beta1","kind":"MachineSet","metadata":{"annotations":{},"creationTimestamp":"2021-10-15T10:51:03Z","generation":2,"labels":{"app.kubernetes.io/instance":"scaleupcluster","machine.openshift.io/cluster-api-cluster":"bm1-f7g6q","machine.openshift.io/cluster-api-machine-role":"worker","machine.openshift.io/cluster-api-machine-type":"worker"},"managedFields":[{"apiVersion":"machine.openshift.io/v1beta1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:machine.openshift.io/cluster-api-cluster":{},"f:machine.openshift.io/cluster-api-machine-role":{},"f:machine.openshift.io/cluster-api-machine-type":{}}},"f:spec":{".":{},"f:replicas":{},"f:selector":{".":{},"f:matchLabels":{".":{},"f:machine.openshift.io/cluster-api-cluster":{},"f:machine.openshift.io/cluster-api-machineset":{}}},"f:template":{".":{},"f:metadata":{".":{},"f:labels":{".":{},"f:machine.openshift.io/cluster-api-cluster":{},"f:machine.openshift.io/cluster-api-machine-role":{},"f:machine.openshift.io/cluster-api-machine-type":{},"f:machine.openshift.io/cluster-api-machineset":{}}},"f:spec":{".":{},"f:metadata":{},"f:providerSpec":{".":{},"f:value":{".":{},"f:apiVersion":{},"f:hostSelector":{},"f:image":{},"f:kind":{},"f:metadata":{},"f:userData":{}}}}}},"f:status":{".":{},"f:fullyLabeledReplicas":{},"f:observedGeneration":{},"f:replicas":{}}},"manager":"cluster-bootstrap","operation":"Update","time":"2021-10-15T10:51:03Z"},{"apiVersion":"machine.openshift.io/v1beta1","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:availableReplicas":{},"f:fullyLabeledReplicas":{},"f:observedGeneration":{},"f:readyReplicas":{},"f:replicas":{}}},"manager":"machineset-controller","operation":"Update","time":"2021-10-18T10:15:38Z"}],"name":"bm1-f7g6q-worker-0","namespace":"openshift-machine-api","resourceVersion":"4153557","uid":"cf6253ae-1f92-4856-83f6-926e063fd520"},"spec":{"replicas":5,"selector":{"matchLabels":{"machine.openshift.io/cluster-api-cluster":"bm1-f7g6q","machine.openshift.io/cluster-api-machineset":"bm1-f7g6q-worker-0"}},"template":{"metadata":{"labels":{"machine.openshift.io/cluster-api-cluster":"bm1-f7g6q","machine.openshift.io/cluster-api-machine-role":"worker","machine.openshift.io/cluster-api-machine-type":"worker","machine.openshift.io/cluster-api-machineset":"bm1-f7g6q-worker-0"}},"spec":{"metadata":{},"providerSpec":{"value":{"apiVersion":"baremetal.cluster.k8s.io/v1alpha1","hostSelector":{},"image":{"checksum":"http://10.6.81.3:6180/images/rhcos-48.84.202106091622-0-openstack.x86_64.qcow2/cached-rhcos-48.84.202106091622-0-openstack.x86_64.qcow2.md5sum","url":"http://10.6.81.3:6180/images/rhcos-48.84.202106091622-0-openstack.x86_64.qcow2/cached-rhcos-48.84.202106091622-0-openstack.x86_64.qcow2"},"kind":"BareMetalMachineProviderSpec","metadata":{"creationTimestamp":null},"userData":{"name":"worker-user-data"}}}}}},"status":{"availableReplicas":4,"fullyLabeledReplicas":4,"observedGeneration":2,"readyReplicas":4,"replicas":4}}
+  resourceVersion: '5935694'
+  name: bm1-f7g6q-worker-0
+  uid: cf6253ae-1f92-4856-83f6-926e063fd520
+  creationTimestamp: '2021-10-15T10:51:03Z'
+  generation: 4
+  managedFields:
+    - apiVersion: machine.openshift.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:machine.openshift.io/cluster-api-cluster': {}
+            'f:machine.openshift.io/cluster-api-machine-role': {}
+            'f:machine.openshift.io/cluster-api-machine-type': {}
+        'f:spec':
+          .: {}
+          'f:selector':
+            .: {}
+            'f:matchLabels':
+              .: {}
+              'f:machine.openshift.io/cluster-api-cluster': {}
+              'f:machine.openshift.io/cluster-api-machineset': {}
+          'f:template':
+            .: {}
+            'f:metadata':
+              .: {}
+              'f:labels':
+                .: {}
+                'f:machine.openshift.io/cluster-api-cluster': {}
+                'f:machine.openshift.io/cluster-api-machine-role': {}
+                'f:machine.openshift.io/cluster-api-machine-type': {}
+                'f:machine.openshift.io/cluster-api-machineset': {}
+            'f:spec':
+              .: {}
+              'f:metadata': {}
+              'f:providerSpec':
+                .: {}
+                'f:value':
+                  .: {}
+                  'f:apiVersion': {}
+                  'f:hostSelector': {}
+                  'f:image': {}
+                  'f:kind': {}
+                  'f:userData': {}
+        'f:status': {}
+      manager: cluster-bootstrap
+      operation: Update
+      time: '2021-10-15T10:51:03Z'
+    - apiVersion: machine.openshift.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:availableReplicas': {}
+          'f:fullyLabeledReplicas': {}
+          'f:observedGeneration': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+      manager: machineset-controller
+      operation: Update
+      time: '2021-10-18T10:15:38Z'
+    - apiVersion: machine.openshift.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+          'f:labels':
+            'f:app.kubernetes.io/instance': {}
+        'f:spec':
+          'f:replicas': {}
+          'f:template':
+            'f:spec':
+              'f:providerSpec':
+                'f:value':
+                  'f:metadata': {}
+      manager: argocd-application-controller
+      operation: Update
+      time: '2021-10-21T08:39:11Z'
+  namespace: openshift-machine-api
+  labels:
+    app.kubernetes.io/instance: scaleupcluster
+    machine.openshift.io/cluster-api-cluster: bm1-f7g6q
+    machine.openshift.io/cluster-api-machine-role: worker
+    machine.openshift.io/cluster-api-machine-type: worker
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: bm1-f7g6q
+      machine.openshift.io/cluster-api-machineset: bm1-f7g6q-worker-0
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: bm1-f7g6q
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: bm1-f7g6q-worker-0
+    spec:
+      metadata: {}
+      providerSpec:
+        value:
+          apiVersion: baremetal.cluster.k8s.io/v1alpha1
+          hostSelector: {}
+          image:
+            checksum: >-
+              http://10.6.81.3:6180/images/rhcos-48.84.202106091622-0-openstack.x86_64.qcow2/cached-rhcos-48.84.202106091622-0-openstack.x86_64.qcow2.md5sum
+            url: >-
+              http://10.6.81.3:6180/images/rhcos-48.84.202106091622-0-openstack.x86_64.qcow2/cached-rhcos-48.84.202106091622-0-openstack.x86_64.qcow2
+          kind: BareMetalMachineProviderSpec
+          metadata: {}
+          userData:
+            name: worker-user-data
+status:
+  availableReplicas: 4
+  fullyLabeledReplicas: 4
+  observedGeneration: 4
+  readyReplicas: 4
+  replicas: 4
