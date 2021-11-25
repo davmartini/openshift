@@ -5,13 +5,13 @@ metadata:
     description: sat-capsule
     kubevirt.io/latest-observed-api-version: v1
     kubevirt.io/storage-observed-api-version: v1alpha3
-    name.os.template.kubevirt.io/rhel8.4: Red Hat Enterprise Linux 8.0 or higher
+    name.os.template.kubevirt.io/rhel7.9: Red Hat Enterprise Linux 7.0 or higher
   name: sat-capsule
   namespace: openshift-vms
   labels:
     app: sat-capsule
-    os.template.kubevirt.io/rhel8.4: 'true'
-    vm.kubevirt.io/template: rhel8-server-large
+    os.template.kubevirt.io/rhel7.9: 'true'
+    vm.kubevirt.io/template: rhel7-server-large
     vm.kubevirt.io/template.namespace: openshift
     vm.kubevirt.io/template.revision: '1'
     vm.kubevirt.io/template.version: v0.15.1
@@ -32,7 +32,7 @@ spec:
           volumeMode: Block
         source:
           pvc:
-            name: rhel8
+            name: rhel7
             namespace: openshift-virtualization-os-images
     - metadata:
         creationTimestamp: null
@@ -53,13 +53,13 @@ spec:
     metadata:
       annotations:
         vm.kubevirt.io/flavor: large
-        vm.kubevirt.io/os: rhel8
+        vm.kubevirt.io/os: rhel7
         vm.kubevirt.io/workload: server
       creationTimestamp: null
       labels:
         kubevirt.io/domain: sat-capsule
         kubevirt.io/size: large
-        os.template.kubevirt.io/rhel8.4: 'true'
+        os.template.kubevirt.io/rhel7.9: 'true'
         vm.kubevirt.io/name: sat-capsule
         workload.template.kubevirt.io/server: 'true'
     spec:
@@ -95,7 +95,7 @@ spec:
           networkInterfaceMultiqueue: true
           rng: {}
         machine:
-          type: pc-q35-rhel8.4.0
+          type: pc-q35-rhel7.9.0
         resources:
           requests:
             memory: 4Gi
