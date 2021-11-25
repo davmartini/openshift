@@ -1,0 +1,120 @@
+
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    description: aap-hub
+    kubevirt.io/latest-observed-api-version: v1
+    kubevirt.io/storage-observed-api-version: v1alpha3
+    name.os.template.kubevirt.io/rhel8.4: Red Hat Enterprise Linux 8.0 or higher
+  name: aap-hub
+  namespace: openshift-vms
+  labels:
+    app: aap-hub
+    os.template.kubevirt.io/rhel8.4: 'true'
+    vm.kubevirt.io/template: rhel8-server-large
+    vm.kubevirt.io/template.namespace: openshift
+    vm.kubevirt.io/template.revision: '1'
+    vm.kubevirt.io/template.version: v0.15.1
+    workload.template.kubevirt.io/server: 'true'
+spec:
+  dataVolumeTemplates:
+    - metadata:
+        creationTimestamp: null
+        name: aap-hub-rootdisk-bm99l
+      spec:
+        pvc:
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 20Gi
+          storageClassName: ocs-storagecluster-ceph-rbd
+          volumeMode: Block
+        source:
+          pvc:
+            name: rhel8
+            namespace: openshift-virtualization-os-images
+    - metadata:
+        creationTimestamp: null
+        name: aap-hub-datadisk-za02m
+      spec:
+        pvc:
+          accessModes:
+            - ReadWriteMany
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: ocs-storagecluster-ceph-rbd
+          volumeMode: Block
+  running: true
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: large
+        vm.kubevirt.io/os: rhel8
+        vm.kubevirt.io/workload: server
+      creationTimestamp: null
+      labels:
+        kubevirt.io/domain: aap-hub
+        kubevirt.io/size: large
+        os.template.kubevirt.io/rhel8.4: 'true'
+        vm.kubevirt.io/name: aap-hub
+        workload.template.kubevirt.io/server: 'true'
+    spec:
+      accessCredentials:
+        - sshPublicKey:
+            propagationMethod:
+              configDrive: {}
+            source:
+              secret:
+                secretName: sshkey
+      domain:
+        cpu:
+          cores: 2
+          sockets: 1
+          threads: 1
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+            - bootOrder: 1
+              disk:
+                bus: virtio
+              name: rootdisk
+            - disk:
+                bus: virtio
+              name: datadisk
+          interfaces:
+            - macAddress: ''
+              masquerade: {}
+              model: virtio
+              name: default
+          networkInterfaceMultiqueue: true
+          rng: {}
+        machine:
+          type: pc-q35-rhel8.4.0
+        resources:
+          requests:
+            memory: 4Gi
+      evictionStrategy: LiveMigrate
+      hostname: aap-hub
+      networks:
+        - name: default
+          pod: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - cloudInitConfigDrive:
+            userData: |-
+              #cloud-config
+              user: cloud-user
+              password: nfd8-r23e-57y5
+              chpasswd: { expire: False }
+          name: cloudinitdisk
+        - dataVolume:
+            name: aap-hub-rootdisk-bm99l
+          name: rootdisk
+        - dataVolume:
+            name: aap-hub-datadisk-za02m
+          name: datadisk
