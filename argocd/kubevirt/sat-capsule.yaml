@@ -84,6 +84,9 @@ spec:
               disk:
                 bus: virtio
               name: rootdisk
+            - disk:
+                bus: virtio
+              name: datadisk
           interfaces:
             - macAddress: ''
               masquerade: {}
