@@ -95,7 +95,7 @@ spec:
           networkInterfaceMultiqueue: true
           rng: {}
         machine:
-          type: pc-q35-rhel7.9.0
+          type: pc-q35-rhel8.4.0
         resources:
           requests:
             memory: 20Gi
