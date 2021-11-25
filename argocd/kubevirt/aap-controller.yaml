@@ -47,6 +47,8 @@ spec:
               storage: 60Gi
           storageClassName: ocs-storagecluster-ceph-rbd
           volumeMode: Block
+        source:
+          blank: {}
   running: true
   template:
     metadata:
