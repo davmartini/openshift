@@ -119,3 +119,17 @@ spec:
         - dataVolume:
             name: sat-capsule-datadisk-za02m
           name: datadisk
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sat-capsule-ssh
+  namespace: openshift-vms
+spec:
+  ports:
+    - protocol: TCP
+      port: 22000
+      targetPort: 22
+  selector:
+    kubevirt.io/domain: sat-capsule
