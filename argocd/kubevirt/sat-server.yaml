@@ -73,7 +73,7 @@ spec:
       domain:
         cpu:
           cores: 2
-          sockets: 1
+          sockets: 2
           threads: 1
         devices:
           disks:
@@ -98,7 +98,7 @@ spec:
           type: pc-q35-rhel8.4.0
         resources:
           requests:
-            memory: 8Gi
+            memory: 20Gi
       evictionStrategy: LiveMigrate
       hostname: sat-server
       networks:
