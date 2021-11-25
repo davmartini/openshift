@@ -119,3 +119,22 @@ spec:
         - dataVolume:
             name: sat-server-datadisk-za02m
           name: datadisk
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sat-server-ssh-service
+  namespace: openshift-vms
+spec:
+  ports:
+    - protocol: TCP
+      port: 2222
+      targetPort: 22
+  selector:
+    kubevirt.io/domain: sat-server
+    os.template.kubevirt.io/rhel8.4: 'true'
+    vm.kubevirt.io/name: sat-server
+    workload.template.kubevirt.io/server: 'true'
+status:
+  loadBalancer: {}
