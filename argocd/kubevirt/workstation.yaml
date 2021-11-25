@@ -47,7 +47,7 @@ spec:
         kubevirt.io/domain: workstation
         kubevirt.io/size: large
         os.template.kubevirt.io/rhel8.4: 'true'
-        vm.kubevirt.io/name: aap-controller
+        vm.kubevirt.io/name: workstation
         workload.template.kubevirt.io/server: 'true'
     spec:
       accessCredentials:
@@ -56,7 +56,7 @@ spec:
               configDrive: {}
             source:
               secret:
-                secretName: authorizedsshkeys
+                secretName: sshkey
       domain:
         cpu:
           cores: 1
