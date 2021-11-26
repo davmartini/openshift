@@ -153,3 +153,19 @@ spec:
       targetPort: 443
   selector:
     kubevirt.io/domain: aap-controller
+
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: aap-controller-route
+  namespace: openshift-vms
+spec:
+  host: aap-controller.redhat.hpecic.net
+  to:
+    kind: Service
+    name: aap-controller-service
+    weight: 100
+  port:
+    targetPort: https
+  wildcardPolicy: None
