@@ -153,3 +153,21 @@ spec:
       targetPort: 443
   selector:
     kubevirt.io/domain: aap-hub
+
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: aap-hub-route
+  namespace: openshift-vms
+spec:
+  host: aap-hub.redhat.hpecic.net
+  to:
+    kind: Service
+    name: aap-hub-service
+    weight: 100
+  port:
+    targetPort: https
+  tls:
+    termination: passthrough
+  wildcardPolicy: None
