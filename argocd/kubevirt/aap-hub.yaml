@@ -134,3 +134,22 @@ spec:
       targetPort: 22
   selector:
     kubevirt.io/domain: aap-hub
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: aap-hub-service
+  namespace: openshift-vms
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443
+  selector:
+    kubevirt.io/domain: aap-hub
