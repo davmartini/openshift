@@ -3,14 +3,14 @@ apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   annotations:
-    description: aap-controller
+    description: aap-exec3
     kubevirt.io/latest-observed-api-version: v1
     kubevirt.io/storage-observed-api-version: v1alpha3
     name.os.template.kubevirt.io/rhel8.4: Red Hat Enterprise Linux 8.0 or higher
-  name: aap-controller
+  name: aap-exec3
   namespace: openshift-vms
   labels:
-    app: aap-controller
+    app: aap-exec3
     os.template.kubevirt.io/rhel8.4: 'true'
     vm.kubevirt.io/template: rhel8-server-large
     vm.kubevirt.io/template.namespace: openshift
@@ -21,14 +21,14 @@ spec:
   dataVolumeTemplates:
     - metadata:
         creationTimestamp: null
-        name: aap-controller-rootdisk-bm99l
+        name: aap-exec3-rootdisk-bm99l
       spec:
         pvc:
           accessModes:
             - ReadWriteMany
           resources:
             requests:
-              storage: 20Gi
+              storage: 60Gi
           storageClassName: ocs-storagecluster-ceph-rbd
           volumeMode: Block
         source:
@@ -37,14 +37,14 @@ spec:
             namespace: openshift-virtualization-os-images
     - metadata:
         creationTimestamp: null
-        name: aap-controller-datadisk-za02m
+        name: aap-exec3-datadisk-za02m
       spec:
         pvc:
           accessModes:
             - ReadWriteMany
           resources:
             requests:
-              storage: 60Gi
+              storage: 40Gi
           storageClassName: ocs-storagecluster-ceph-rbd
           volumeMode: Block
         source:
@@ -58,10 +58,10 @@ spec:
         vm.kubevirt.io/workload: server
       creationTimestamp: null
       labels:
-        kubevirt.io/domain: aap-controller
+        kubevirt.io/domain: aap-exec3
         kubevirt.io/size: large
         os.template.kubevirt.io/rhel8.4: 'true'
-        vm.kubevirt.io/name: aap-controller
+        vm.kubevirt.io/name: aap-exec3
         workload.template.kubevirt.io/server: 'true'
     spec:
       accessCredentials:
@@ -101,7 +101,7 @@ spec:
           requests:
             memory: 16Gi
       evictionStrategy: LiveMigrate
-      hostname: aap-controller
+      hostname: aap-exec3
       networks:
         - name: default
           pod: {}
@@ -115,17 +115,17 @@ spec:
               chpasswd: { expire: False }
           name: cloudinitdisk
         - dataVolume:
-            name: aap-controller-rootdisk-bm99l
+            name: aap-exec3-rootdisk-bm99l
           name: rootdisk
         - dataVolume:
-            name: aap-controller-datadisk-za02m
+            name: aap-exec3-datadisk-za02m
           name: datadisk
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: aap-controller-ssh
+  name: aap-exec3-ssh
   namespace: openshift-vms
 spec:
   ports:
@@ -133,13 +133,13 @@ spec:
       port: 22000
       targetPort: 22
   selector:
-    kubevirt.io/domain: aap-controller
+    kubevirt.io/domain: aap-exec3
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: aap-controller-service
+  name: aap-exec3-service
   namespace: openshift-vms
 spec:
   ports:
@@ -152,22 +152,4 @@ spec:
       port: 443
       targetPort: 443
   selector:
-    kubevirt.io/domain: aap-controller
-
----
-kind: Route
-apiVersion: route.openshift.io/v1
-metadata:
-  name: aap-controller-route
-  namespace: openshift-vms
-spec:
-  host: aap-controller.redhat.hpecic.net
-  to:
-    kind: Service
-    name: aap-controller-service
-    weight: 100
-  port:
-    targetPort: https
-  tls:
-    termination: passthrough
-  wildcardPolicy: None
+    kubevirt.io/domain: aap-exec3
