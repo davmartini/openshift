@@ -125,24 +125,14 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: aap-exec3-ssh
+  name: aap-exec3
   namespace: openshift-vms
 spec:
   ports:
-    - protocol: TCP
+    - name: ssh
+      protocol: TCP
       port: 22
       targetPort: 22
-  selector:
-    kubevirt.io/domain: aap-exec3
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: aap-exec3-service
-  namespace: openshift-vms
-spec:
-  ports:
     - name: http
       protocol: TCP
       port: 80

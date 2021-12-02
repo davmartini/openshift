@@ -125,24 +125,14 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: aap-hub-ssh
+  name: aap-hub
   namespace: openshift-vms
 spec:
   ports:
-    - protocol: TCP
+    - name: ssh
+      protocol: TCP
       port: 22
       targetPort: 22
-  selector:
-    kubevirt.io/domain: aap-hub
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: aap-hub-service
-  namespace: openshift-vms
-spec:
-  ports:
     - name: http
       protocol: TCP
       port: 80
@@ -164,7 +154,7 @@ spec:
   host: aap-hub.redhat.hpecic.net
   to:
     kind: Service
-    name: aap-hub-service
+    name: aap-hub
     weight: 100
   port:
     targetPort: https
