@@ -130,7 +130,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 22000
+      port: 22
       targetPort: 22
   selector:
     kubevirt.io/domain: aap-exec3
