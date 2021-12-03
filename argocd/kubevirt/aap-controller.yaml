@@ -131,12 +131,12 @@ spec:
   ports:
     - name: aap-receptor-tcp
       protocol: TCP
-      port: 8928
-      targetPort: 8928
+      port: 27199
+      targetPort: 27199
     - name: aap-receptor-udp
       protocol: UDP
-      port: 8928
-      targetPort: 8928
+      port: 27199
+      targetPort: 27199
     - name: ssh
       protocol: TCP
       port: 22
