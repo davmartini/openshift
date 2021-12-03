@@ -129,6 +129,14 @@ metadata:
   namespace: openshift-vms
 spec:
   ports:
+    - name: aap-receptor-tcp
+      protocol: TCP
+      port: 8928
+      targetPort: 8928
+    - name: aap-receptor-udp
+      protocol: UDP
+      port: 8928
+      targetPort: 8928
     - name: ssh
       protocol: TCP
       port: 22
