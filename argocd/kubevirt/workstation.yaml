@@ -100,3 +100,26 @@ spec:
         - dataVolume:
             name: workstation-rootdisk-bm99l
           name: rootdisk
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: workstation
+  namespace: openshift-vms
+spec:
+  ports:
+    - name: workstation-ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22
+      nodePort: 32201
+    - name: workstation-cockpit
+      protocol: TCP
+      port: 9090
+      targetPort: 9090
+      nodePort: 32202
+  internalTrafficPolicy: Cluster
+  type: NodePort
+  selector:
+    kubevirt.io/domain: workstation
