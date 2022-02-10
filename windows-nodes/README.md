@@ -1,5 +1,13 @@
 # Documentation to install a cluster with Linux & Windows worker nodes
 
+## Important prerequisites 
+
+- A OCP4 cluster with OVN as SDN
+- SDN Hybrid configuration in place before cluster deployment 
+
+## Deployment
+
+
 1. Install a cluster with OVN-Kubernetes as SDN with hybrid configuration  
 https://docs.openshift.com/container-platform/4.9/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html  
 
