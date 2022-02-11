@@ -163,3 +163,12 @@ oc adm certificate approve $CSR_ID
 ````
 
 ![ConfigMap](images/configmap.png)
+
+
+### 9. Enjoy result 
+
+- Windows 2019 VM as worker node in a OCP cluster
+![worker_win2019](images/w2019_node.png)
+
+- Windows 2022 VM as worker node in a OCP cluster
+![worker_win2022](images/w2022_node.png)
