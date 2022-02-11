@@ -21,11 +21,11 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 ## Deployment
 
 ### 1. Install a cluster with OVN-Kubernetes as SDN with hybrid configuration  
-https://docs.openshift.com/container-platform/4.9/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html  
+:memo: https://docs.openshift.com/container-platform/4.9/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html  
 
 ### 2. Deploy dedicated Windows operator via OperatorHub marketplace
 
-> :heavy_exclamation_mark: test
+> :warning: 
 
 ![Windows Operator](images/windows_operator.png)
 ![Windows Operator](images/operator.png)
