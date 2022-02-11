@@ -135,6 +135,8 @@ ssh administrator@$IP icacls.exe "C:\ProgramData\ssh\administrators_authorized_k
 oc create secret generic cloud-private-key --from-file=private-key.pem=$YOUR_PRIVATE_KEY -n openshift-windows-machine-config-operator 
 ````
 
+![Secret](images/secret_pk.png)
+
 
 ### 8. Create ConfigMap
 
@@ -160,3 +162,4 @@ oc get csr
 oc adm certificate approve $CSR_ID
 ````
 
+![ConfigMap](images/configmap.png)
