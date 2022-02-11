@@ -38,6 +38,7 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 ![Windows Operator](images/windows_operator.png)
 ![Windows Operator](images/operator.png)
 
+
 ### 3. Deploy your Windows nodes
 
 Being on a platform not supporting MachineSet (AWS, Azure or vSphere), I deployed manually Windows VMs with fresh install to add them in a second time following documented Bring-Your-Own-Host (BYOH) process.  
@@ -45,6 +46,7 @@ Being on a platform not supporting MachineSet (AWS, Azure or vSphere), I deploye
 After Windows VM deployed, you have just to install Docker engine and OpenSSH server on your nodes (documentend bellow) before to integrate the node to your OCP cluster.  
 
 Please verify your deployment match with described prerequisites : https://docs.openshift.com/container-platform/4.9/windows_containers/byoh-windows-instance.html
+
 
 ### 4. Install Docker on your Windwos nodes  
 > :memo: https://computingforgeeks.com/how-to-run-docker-containers-on-windows-server-2019/
@@ -77,6 +79,7 @@ Get-Package -Name Docker -ProviderName DockerMsftProvider
 # Start service
 Start-Service Docker
 ````
+
 
 ### 5. Instal OpenSSH on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
@@ -113,6 +116,7 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 }
 ````
 
+
 ### 6. Configure Pub key on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
 
@@ -124,3 +128,35 @@ scp $YOUR_PUB_KEY administrator@$IP:C:\ProgramData\ssh\administrators_authorized
 # Appropriately ACL the authorized_keys file on your server
 ssh administrator@$IP icacls.exe "C:\ProgramData\ssh\administrators_authorized_keys" /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 ````
+
+
+### 7. Create Private Key as secret in the openshift-windows-machine-config-operator OCP namespace
+````
+oc create secret generic cloud-private-key --from-file=private-key.pem=$YOUR_PRIVATE_KEY -n openshift-windows-machine-config-operator 
+````
+
+
+### 8. Create ConfigMap
+
+This ConfigMap order to windows-machine operator to add specified node(s) in your cluster.
+````
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: windows-instances
+  namespace: openshift-windows-machine-config-operator
+data:
+  10.1.42.1: |- 
+    username=Administrator 
+  instance.example.com: |-
+    username=core
+````
+
+:warning: During this node integration process, you will meed to accept CSR.
+````
+# Get pending CSR
+oc get csr
+# Approve CSR
+oc adm certificate approve $CSR_ID
+````
+
