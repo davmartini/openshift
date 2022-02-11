@@ -178,3 +178,14 @@ oc adm certificate approve $CSR_ID
 
 - Terminal on a running Windows container on a Windows node
 ![win_terminal](images/terminal_w_container.png)
+
+
+## Applications examples
+
+### .NET Core : Modern framework
+
+[S2I .NET Core](https://github.com/redhat-developer/s2i-dotnetcore-ex)
+
+### .NET Framework : Legacy framework
+
+[.NET Framework app](https://github.com/redhat-developer-demos/netcandystore)
