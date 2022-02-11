@@ -24,9 +24,11 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 https://docs.openshift.com/container-platform/4.9/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html  
 
 ### 2. Deploy dedicated Windows operator via OperatorHub marketplace
-![Windows Operator](images/windows_operator.png)
-![Windows Operator](operator.png)
 
+> :heavy_exclamation_mark: test
+
+![Windows Operator](images/windows_operator.png)
+![Windows Operator](images/operator.png)
 
 ### 3. Deploy your Windows nodes
 
