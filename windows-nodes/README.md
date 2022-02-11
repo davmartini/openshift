@@ -45,8 +45,30 @@ Please verify your deployment match with described prerequisites : https://docs.
 
 In a Powershell windows :
 ````
+# Add repository
 Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
 ````
+
+````
+# Install docker
+Install-Package -Name docker -ProviderName DockerMsftProvider
+````
+
+````
+# Get Installed version
+Get-Package -Name Docker -ProviderName DockerMsftProvider
+ Name                           Version          Source                           ProviderName
+ ----                           -------          ------                           ------------
+ docker                         18.09.2          DockerDefault                    DockerMsftProvider
+````
+
+````
+# Start service
+Start-Service Docker
+````
+
+
+
 
 
 
