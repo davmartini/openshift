@@ -21,7 +21,7 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 ## Deployment
 
 ### 1. Install a cluster with OVN-Kubernetes as SDN with hybrid configuration  
-:memo: https://docs.openshift.com/container-platform/4.9/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html  
+> :memo: https://docs.openshift.com/container-platform/4.9/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html  
 
 ### 2. Deploy dedicated Windows operator via OperatorHub marketplace
 
@@ -33,10 +33,10 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 ### 3. Deploy your Windows nodes
 
 ### 4. Install Docker on your Windwos nodes  
-https://computingforgeeks.com/how-to-run-docker-containers-on-windows-server-2019/
+> :memo: https://computingforgeeks.com/how-to-run-docker-containers-on-windows-server-2019/
 
 ### 5. Instal OpenSSH on your Windows nodes  
-https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
+> :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
 
 ### 6. Configure Pub key on your Windows nodes  
-https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
+> :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
