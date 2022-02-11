@@ -4,6 +4,11 @@
 
 In this documentation, I will present to you how to deploy a mix cluster with Linux and Windows node to host modern applications and legacy applications based on old dotnet framework.
 
+## Reminder
+
+- If your applications are based on .NET core, **you don't need Windows nodes !**. You can run your application on natif Linux worker nodes with certified, supported, secure container images provided by Red Hat.
+- If your applications are based on the **legacy** .NET Framework, you need to have Windows nodes to run these specific Windows containers. In this case, Windows nodes will be dedicated to run these containers. 
+
 ## Lab environment
 
 - A OpenShift cluster version 4.9
@@ -109,3 +114,5 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 
 ### 6. Configure Pub key on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
+
+
