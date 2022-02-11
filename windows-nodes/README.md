@@ -43,7 +43,7 @@ Please verify your deployment match with described prerequisites : https://docs.
 ### 4. Install Docker on your Windwos nodes  
 > :memo: https://computingforgeeks.com/how-to-run-docker-containers-on-windows-server-2019/
 
-In a Powershell windows :
+In a Powershell window :
 ````
 # Add repository
 Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
@@ -52,6 +52,11 @@ Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
 ````
 # Install docker
 Install-Package -Name docker -ProviderName DockerMsftProvider
+````
+
+````
+# Reboot server
+Restart-Computer -Force
 ````
 
 ````
@@ -67,13 +72,40 @@ Get-Package -Name Docker -ProviderName DockerMsftProvider
 Start-Service Docker
 ````
 
-
-
-
-
-
 ### 5. Instal OpenSSH on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
+
+In a Powershell window :
+````
+# Check package
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+Name  : OpenSSH.Client~~~~0.0.1.0
+State : NotPresent
+
+Name  : OpenSSH.Server~~~~0.0.1.0
+State : NotPresent
+````
+
+````
+# Install the OpenSSH Server
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+````
+
+````
+# Start the sshd service
+Start-Service sshd
+
+# OPTIONAL but recommended:
+Set-Service -Name sshd -StartupType 'Automatic'
+
+# Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
+if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
+    Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
+    New-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+} else {
+    Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
+}
+````
 
 ### 6. Configure Pub key on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
