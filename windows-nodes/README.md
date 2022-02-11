@@ -172,3 +172,9 @@ oc adm certificate approve $CSR_ID
 
 - Windows 2022 VM as worker node in a OCP cluster
 ![worker_win2022](images/w2022_node.png)
+
+- Metrics on Windows node
+![metrics](images/metrics_node.png)
+
+- Terminal on a running Windows container on a Windows node
+![win_terminal](images/terminal_w_container.png)
