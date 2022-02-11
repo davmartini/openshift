@@ -35,11 +35,20 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 ### 3. Deploy your Windows nodes
 
 Being on a platform not supporting MachineSet (AWS, Azure or vSphere), I deployed manually Windows VMs with fresh install to add them in a second time following documented Bring-Your-Own-Host (BYOH) process.  
+
 After Windows VM deployed, you have just to install Docker engine and OpenSSH server on your nodes (documentend bellow) before to integrate the node to your OCP cluster.  
+
 Please verify your deployment match with described prerequisites : https://docs.openshift.com/container-platform/4.9/windows_containers/byoh-windows-instance.html
 
 ### 4. Install Docker on your Windwos nodes  
 > :memo: https://computingforgeeks.com/how-to-run-docker-containers-on-windows-server-2019/
+
+In a Powershell windows :
+````
+Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
+````
+
+
 
 ### 5. Instal OpenSSH on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
