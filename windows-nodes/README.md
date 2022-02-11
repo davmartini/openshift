@@ -6,8 +6,9 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 
 ## Reminder
 
-- If your applications are based on .NET core, **you don't need Windows nodes !**. You can run your application on natif Linux worker nodes with certified, supported, secure container images provided by Red Hat.
-- If your applications are based on the **legacy** .NET Framework, you need to have Windows nodes to run these specific Windows containers. In this case, Windows nodes will be dedicated to run these containers. 
+> :warning: If your applications are based on .NET core, **you don't need Windows nodes !**. You can run your application on natif Linux worker nodes with certified, supported, secure container images provided by Red Hat.
+
+> :warning: If your applications are based on the **legacy** .NET Framework, you need to have Windows nodes to run these specific Windows containers. In this case, Windows nodes will be dedicated to run these containers. 
 
 ## Lab environment
 
