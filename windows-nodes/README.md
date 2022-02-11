@@ -25,12 +25,18 @@ In this documentation, I will present to you how to deploy a mix cluster with Li
 
 ### 2. Deploy dedicated Windows operator via OperatorHub marketplace
 
-> :warning: 
+> :memo: https://docs.openshift.com/container-platform/4.9/windows_containers/enabling-windows-container-workloads.html
+
+> :warning: Click the Enable Operator recommended cluster monitoring on the Namespace checkbox to enable cluster monitoring for the WMCO.
 
 ![Windows Operator](images/windows_operator.png)
 ![Windows Operator](images/operator.png)
 
 ### 3. Deploy your Windows nodes
+
+Being on a platform not supporting MachineSet (AWS, Azure or vSphere), I deployed manually Windows VMs with fresh install to add them in a second time following documented Bring-Your-Own-Host (BYOH) process.  
+After Windows VM deployed, you have just to install Docker engine and OpenSSH server on your nodes (documentend bellow) before to integrate the node to your OCP cluster.  
+Please verify your deployment match with described prerequisites : https://docs.openshift.com/container-platform/4.9/windows_containers/byoh-windows-instance.html
 
 ### 4. Install Docker on your Windwos nodes  
 > :memo: https://computingforgeeks.com/how-to-run-docker-containers-on-windows-server-2019/
