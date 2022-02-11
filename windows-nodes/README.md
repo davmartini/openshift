@@ -116,4 +116,11 @@ if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyCon
 ### 6. Configure Pub key on your Windows nodes  
 > :memo: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement
 
+For admin users:
+````
+# Use scp to copy the public key file generated previously on your client to the authorized_keys file on your server
+scp $YOUR_PUB_KEY administrator@$IP:C:\ProgramData\ssh\administrators_authorized_keys
 
+# Appropriately ACL the authorized_keys file on your server
+ssh administrator@$IP icacls.exe "C:\ProgramData\ssh\administrators_authorized_keys" /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
+````
