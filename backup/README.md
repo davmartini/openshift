@@ -42,3 +42,7 @@ total 157156
 -rw-------. 1 root root     78617 Feb 14 16:14 static_kuberesources_2022-02-14_161413.tar.gz
 -rw-------. 1 root root 160841760 Feb 14 16:14 snapshot_2022-02-14_161413.db
 ````
+
+## Restore
+
+https://docs.openshift.com/container-platform/4.9/backup_and_restore/control_plane_backup_and_restore/disaster_recovery/scenario-2-restoring-cluster-state.html#dr-restoring-cluster-state
