@@ -29,12 +29,11 @@ spec:
           resources:
             requests:
               storage: 20Gi
-          storageClassName: ocs-storagecluster-ceph-rbd
+          storageClassName: local-disks
           volumeMode: Block
         source:
           pvc:
-            name: rhel8
-            namespace: openshift-virtualization-os-images
+            name: dm-rhel8-template-rootdisk
     - metadata:
         creationTimestamp: null
         name: aap-controller-datadisk-za02m
@@ -45,7 +44,7 @@ spec:
           resources:
             requests:
               storage: 60Gi
-          storageClassName: ocs-storagecluster-ceph-rbd
+          storageClassName: local-disks
           volumeMode: Block
         source:
           blank: {}
@@ -156,10 +155,10 @@ spec:
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: aap-controller-route
+  name: aap-controller
   namespace: openshift-vms
 spec:
-  host: aap-controller.redhat.hpecic.net
+  host: aap-controller.apps.ocp.drkspace.fr
   to:
     kind: Service
     name: aap-controller
