@@ -1,11 +1,11 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
+  annotations:
   name: aap-controller
   namespace: openshift-vms
   labels:
     app: aap-controller
-    flavor.template.kubevirt.io/small: 'true'
     os.template.kubevirt.io/rhel8.5: 'true'
     vm.kubevirt.io/template: dm-rhel8-template
     vm.kubevirt.io/template.namespace: openshift-vms
@@ -16,7 +16,8 @@ spec:
   dataVolumeTemplates:
     - metadata:
         creationTimestamp: null
-        name: aap-controller-rootdisk
+        name: aap-controller-rootdisk-120en
+        namespace: openshift-vms
       spec:
         source:
           pvc:
@@ -25,6 +26,9 @@ spec:
         storage:
           accessModes:
             - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
           storageClassName: local-disks
           volumeMode: Filesystem
   running: true
@@ -36,7 +40,6 @@ spec:
         vm.kubevirt.io/workload: server
       creationTimestamp: null
       labels:
-        flavor.template.kubevirt.io/small: 'true'
         kubevirt.io/domain: aap-controller
         kubevirt.io/size: small
         os.template.kubevirt.io/rhel8.5: 'true'
@@ -58,8 +61,7 @@ spec:
                 bus: virtio
               name: rootdisk
           interfaces:
-            - macAddress: '02:8f:f9:00:00:0d'
-              masquerade: {}
+            - masquerade: {}
               model: virtio
               name: nic-0
           networkInterfaceMultiqueue: true
@@ -94,8 +96,9 @@ spec:
                   dmartini@Davids-MacBook-Pro
           name: cloudinitdisk
         - dataVolume:
-            name: aap-controller-rootdisk
+            name: aap-controller-rootdisk-120en
           name: rootdisk
+
 
 ---
 kind: Service
