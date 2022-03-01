@@ -1,80 +1,55 @@
-
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   annotations:
-    description: aap-hub
-    kubevirt.io/latest-observed-api-version: v1
-    kubevirt.io/storage-observed-api-version: v1alpha3
-    name.os.template.kubevirt.io/rhel8.4: Red Hat Enterprise Linux 8.0 or higher
   name: aap-hub
   namespace: openshift-vms
   labels:
     app: aap-hub
-    os.template.kubevirt.io/rhel8.4: 'true'
-    vm.kubevirt.io/template: rhel8-server-large
-    vm.kubevirt.io/template.namespace: openshift
+    os.template.kubevirt.io/rhel8.5: 'true'
+    vm.kubevirt.io/template: dm-rhel8-template
+    vm.kubevirt.io/template.namespace: openshift-vms
     vm.kubevirt.io/template.revision: '1'
-    vm.kubevirt.io/template.version: v0.15.1
+    vm.kubevirt.io/template.version: v0.16.4
     workload.template.kubevirt.io/server: 'true'
 spec:
   dataVolumeTemplates:
     - metadata:
         creationTimestamp: null
-        name: aap-hub-rootdisk-bm99l
+        name: aap-hub-rootdisk-120en
+        namespace: openshift-vms
       spec:
-        pvc:
-          accessModes:
-            - ReadWriteMany
-          resources:
-            requests:
-              storage: 20Gi
-          storageClassName: ocs-storagecluster-ceph-rbd
-          volumeMode: Block
         source:
           pvc:
-            name: rhel8
-            namespace: openshift-virtualization-os-images
-    - metadata:
-        creationTimestamp: null
-        name: aap-hub-datadisk-za02m
-      spec:
-        pvc:
+            name: dm-rhel8-template-rootdisk
+            namespace: openshift-vms
+        storage:
           accessModes:
-            - ReadWriteMany
+            - ReadWriteOnce
           resources:
             requests:
-              storage: 100Gi
-          storageClassName: ocs-storagecluster-ceph-rbd
-          volumeMode: Block
-        source:
-          blank: {}
+              storage: 40Gi
+          storageClassName: local-disks
+          volumeMode: Filesystem
   running: true
   template:
     metadata:
       annotations:
-        vm.kubevirt.io/flavor: large
+        vm.kubevirt.io/flavor: small
         vm.kubevirt.io/os: rhel8
         vm.kubevirt.io/workload: server
       creationTimestamp: null
       labels:
         kubevirt.io/domain: aap-hub
-        kubevirt.io/size: large
-        os.template.kubevirt.io/rhel8.4: 'true'
+        kubevirt.io/size: small
+        os.template.kubevirt.io/rhel8.5: 'true'
         vm.kubevirt.io/name: aap-hub
         workload.template.kubevirt.io/server: 'true'
     spec:
-      accessCredentials:
-        - sshPublicKey:
-            propagationMethod:
-              configDrive: {}
-            source:
-              secret:
-                secretName: sshkey
       domain:
         cpu:
           cores: 2
-          sockets: 1
+          sockets: 2
           threads: 1
         devices:
           disks:
@@ -85,14 +60,11 @@ spec:
               disk:
                 bus: virtio
               name: rootdisk
-            - disk:
-                bus: virtio
-              name: datadisk
           interfaces:
             - macAddress: ''
               masquerade: {}
               model: virtio
-              name: default
+              name: nic-0
           networkInterfaceMultiqueue: true
           rng: {}
         machine:
@@ -103,23 +75,30 @@ spec:
       evictionStrategy: LiveMigrate
       hostname: aap-hub
       networks:
-        - name: default
+        - name: nic-0
           pod: {}
       terminationGracePeriodSeconds: 180
       volumes:
-        - cloudInitConfigDrive:
-            userData: |-
+        - cloudInitNoCloud:
+            userData: |
               #cloud-config
               user: cloud-user
-              password: nfd8-r23e-57y5
-              chpasswd: { expire: False }
+              password: ''
+              chpasswd:
+                expire: false
+              ssh_authorized_keys:
+                - >-
+                  ssh-rsa
+                  AAAAB3NzaC1yc2EAAAADAQABAAABgQCeKuohg3lPzDeeQBqXrllzylbJEDrVg9bbpGaYeLfTQ1ibAXpU6PDwOvweHvzBRleW/39Y4t2pF0T6DiQgymapIuRFIXqJR6qKRB6GUdJgLzV4q5IJFmDJFE3XO9TS24N4stjzvNiOH/LNjN5mVHKLorO7qIPS9O3eRi66Bkqsj6Wg8NLI8ufGCBeBXu/rcnDW2phyoKvSrXl0vYNc+nSCGYNU/Fmh6hpomtm/6h+9A3ep6SOyC8RepId1kF3IXLyQpbFXEGDmcbxUgH2FQnsBe+M62rYU0lP/c7wEdWRvYX0c17ZFeg65D9DW8u8Ya33PeicgH4N4ooKGTb5Uekj54OGYnxrlwP+gXTJNk8IYd3UgdYNZTzvHKb9YMHY1Z11kYaQWi6YZwxazCoH/KIADCMzbKnayZAiwgOTVi2jP2JQvEGe+TAoYLKM1Gr9pEQC9yZImArBmw3w50yI1ZiKy+DgygolZYeGhYixGU1jePujMUgGw5EaoZzrJ9gbz47c=
+                  dmartini@Davids-MacBook-Pro
+                - >-
+                  ssh-rsa
+                  AAAAB3NzaC1yc2EAAAADAQABAAABgQC3OL8vJoTsbn/LBUZWgV8YYmxUZSMAWZ6UKMHC2iF9VCYmuI0opJKNBpEDFlomrENOm7HkEIafdPpFfEiDMszDhskvNWAVPiJJChjMBxFgvNWLAEHJQKvGaylVDF4yOex9ehMKOnhBVnO7FFrn33AmgiikEQRcqkz9Q1NQ7ccDZzF5eml0brxmO+2IziUrPdeVwkR7Wzw19zyxLf3f7dfGkfnfoeku1D8BWQaclN0T8AAC4IAVQ1YXp5kf4rpPdf3eCMUKItJCwW4nAKLmJDoJTMXx6LsOGsBZHwPxV0LbR9titUhGpRCBor2nYs1EnN4qCd7f+3yU0lZ+dV5HdMWXesD2czEY8CTncEhD+6c4x3RnyLNC+zqHuM4U1szsQPkOxI5zqItxVgy0HmLThpaA0knohTVYAnq+Qhw+iA6yokRv/pBRTr9fPeUv03LBB5tYEhBDCkGICY4ZRuT+NlsBHMxAjeQIIYeOh0DwldEl2QXVJc3eNt5nkQw49BoCGIU=
+                  dmartini@Davids-MacBook-Pro
           name: cloudinitdisk
         - dataVolume:
-            name: aap-hub-rootdisk-bm99l
+            name: aap-hub-rootdisk-120en
           name: rootdisk
-        - dataVolume:
-            name: aap-hub-datadisk-za02m
-          name: datadisk
 
 ---
 kind: Service
