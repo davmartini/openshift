@@ -1,147 +1,15 @@
-apiVersion: kubevirt.io/v1
-kind: VirtualMachine
-metadata:
-  annotations:
-    description: sat-server
-    kubevirt.io/latest-observed-api-version: v1
-    kubevirt.io/storage-observed-api-version: v1alpha3
-    name.os.template.kubevirt.io/rhel7.9: Red Hat Enterprise Linux 7.0 or higher
-  name: sat-server
-  namespace: openshift-vms
-  labels:
-    app: sat-server
-    os.template.kubevirt.io/rhel7.9: 'true'
-    vm.kubevirt.io/template: rhel7-server-large
-    vm.kubevirt.io/template.namespace: openshift
-    vm.kubevirt.io/template.revision: '1'
-    vm.kubevirt.io/template.version: v0.15.1
-    workload.template.kubevirt.io/server: 'true'
-spec:
-  dataVolumeTemplates:
-    - metadata:
-        creationTimestamp: null
-        name: sat-server-rootdisk-bm99l
-      spec:
-        pvc:
-          accessModes:
-            - ReadWriteMany
-          resources:
-            requests:
-              storage: 40Gi
-          storageClassName: ocs-storagecluster-ceph-rbd
-          volumeMode: Block
-        source:
-          pvc:
-            name: rhel7
-            namespace: openshift-virtualization-os-images
-    - metadata:
-        creationTimestamp: null
-        name: sat-server-datadisk-za02m
-      spec:
-        pvc:
-          accessModes:
-            - ReadWriteMany
-          resources:
-            requests:
-              storage: 200Gi
-          storageClassName: ocs-storagecluster-ceph-rbd
-          volumeMode: Block
-        source:
-          blank: {}
-  running: true
-  template:
-    metadata:
-      annotations:
-        vm.kubevirt.io/flavor: large
-        vm.kubevirt.io/os: rhel7
-        vm.kubevirt.io/workload: server
-      creationTimestamp: null
-      labels:
-        kubevirt.io/domain: sat-server
-        kubevirt.io/size: large
-        os.template.kubevirt.io/rhel7.9: 'true'
-        vm.kubevirt.io/name: aap-controller
-        workload.template.kubevirt.io/server: 'true'
-    spec:
-      accessCredentials:
-        - sshPublicKey:
-            propagationMethod:
-              configDrive: {}
-            source:
-              secret:
-                secretName: sshkey
-      domain:
-        cpu:
-          cores: 2
-          sockets: 2
-          threads: 1
-        devices:
-          disks:
-            - disk:
-                bus: virtio
-              name: cloudinitdisk
-            - bootOrder: 1
-              disk:
-                bus: virtio
-              name: rootdisk
-            - disk:
-                bus: virtio
-              name: datadisk
-          interfaces:
-            - macAddress: ''
-              masquerade: {}
-              model: virtio
-              name: default
-          networkInterfaceMultiqueue: true
-          rng: {}
-        machine:
-          type: pc-q35-rhel8.4.0
-        resources:
-          requests:
-            memory: 20Gi
-      evictionStrategy: LiveMigrate
-      hostname: sat-server
-      networks:
-        - name: default
-          pod: {}
-      terminationGracePeriodSeconds: 180
-      volumes:
-        - cloudInitConfigDrive:
-            userData: |-
-              #cloud-config
-              user: cloud-user
-              password: nfd8-r23e-57y5
-              chpasswd: { expire: False }
-          name: cloudinitdisk
-        - dataVolume:
-            name: sat-server-rootdisk-bm99l
-          name: rootdisk
-        - dataVolume:
-            name: sat-server-datadisk-za02m
-          name: datadisk
-
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: sat-server-ssh
+  name: satellite
   namespace: openshift-vms
 spec:
   ports:
-    - protocol: TCP
+    - name: ssh
+      protocol: TCP
       port: 22
       targetPort: 22
-  selector:
-    kubevirt.io/domain: sat-server
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: sat-server-service
-  namespace: openshift-vms
-spec:
-  ports:
     - name: dnstcp
       protocol: TCP
       port: 53
@@ -175,4 +43,4 @@ spec:
       port: 9090
       targetPort: 9090
   selector:
-    kubevirt.io/domain: sat-server
+    kubevirt.io/domain: satellite
