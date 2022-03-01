@@ -61,7 +61,8 @@ spec:
                 bus: virtio
               name: rootdisk
           interfaces:
-            - masquerade: {}
+            - macAddress: ''
+              masquerade: {}
               model: virtio
               name: nic-0
           networkInterfaceMultiqueue: true
