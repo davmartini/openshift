@@ -127,10 +127,10 @@ spec:
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: aap-hub-route
+  name: aap-hub
   namespace: openshift-vms
 spec:
-  host: aap-hub.redhat.hpecic.net
+  host: aap-hub.apps.ocp.drkspace.fr
   to:
     kind: Service
     name: aap-hub
