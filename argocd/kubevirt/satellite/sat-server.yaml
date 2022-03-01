@@ -44,3 +44,23 @@ spec:
       targetPort: 9090
   selector:
     kubevirt.io/domain: satellite
+
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: satellite
+  namespace: openshift-vms
+  labels:
+    app.kubernetes.io/instance: satellite
+spec:
+  host: satellite.apps.ocp.drkspace.fr
+  to:
+    kind: Service
+    name: satellite
+    weight: 100
+  port:
+    targetPort: https
+  tls:
+    termination: passthrough
+  wildcardPolicy: None
