@@ -1,6 +1,0 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: openshift-vms
-  labels:
-    kubernetes.io/metadata.name: openshift-vms
