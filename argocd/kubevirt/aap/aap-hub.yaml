@@ -120,6 +120,9 @@ spec:
       protocol: TCP
       port: 443
       targetPort: 443
+    - name: postgresql
+      protocol: TCP
+      port: 5432
   selector:
     kubevirt.io/domain: aap-hub
 
