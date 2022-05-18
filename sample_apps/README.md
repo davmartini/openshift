@@ -2,7 +2,7 @@
 
 ## Github Webhook
 
-1. Create a secret in your OpenShift Project
+- 1. Create a secret in your OpenShift Project
 
 github-secret.yaml
 ```
