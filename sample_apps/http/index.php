@@ -94,8 +94,8 @@
           <div style="text-align:center">
             <img src="images/techdata.svg" width="280" height="125"/>
           </div>
-          <div style="background-color:blue" style="text-align:center">
-            <p style="color:white">Paris la Défense</p>
+          <div style="background-color:blue">
+            <p style="color:white" style="text-align:center">Paris la Défense</p>
           </div>
           <hr/>
           <div class="footer">
