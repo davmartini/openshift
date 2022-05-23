@@ -71,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">OpenShift Helloworld</a>
+              <a class="navbar-brand" href="#">OpenShift Hello World</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -90,10 +90,13 @@
             <h2>Bienvenue à cet événement Tech Data</h2>
             <p>OpenShift est plus qu'une plateforme de container, c'est une plateforme cloud-native complète du développement au run</p>
           </div>
+          <div>
+              <p>image</p>
+          </div> 
           <hr/>
           <div class="footer">
             <p>2022 David Martini,&nbsp;Visits:&nbsp;<span id="visits">&nbsp;</span>,&nbsp;&nbsp;<span id="clock">&nbsp;</span></p>
-            <div title="The container ID is the ID of the container (or host) that is the helloworld application."><?php echo "hostname is:".gethostname(); ?>
+            <div title="The container ID is the ID of the container (or host) that is the helloworld application."><?php echo "Container ID : ".gethostname(); ?>
             </div>
             <html>  
 </html>
