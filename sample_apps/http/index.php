@@ -62,7 +62,7 @@
     </head>
     <body  onload="updateVisit(); updateClock(); setInterval('updateClock()', 1000 )">
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:red;">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -86,17 +86,14 @@
         <div class="container theme-showcase" role="main">
     
           <!-- Main jumbotron for a primary marketing message or call to action -->
-          <div class="jumbotron" style="background-color:grey;">
+          <div class="jumbotron">
             <h2>Bienvenue à cet événement Tech Data</h2>
             <p>OpenShift est plus qu'une plateforme de container, c'est une plateforme cloud-native complète du développement au run</p>
           </div>
           <hr/>
           <div class="footer">
             <p>2022 David Martini,&nbsp;Visits:&nbsp;<span id="visits">&nbsp;</span>,&nbsp;&nbsp;<span id="clock">&nbsp;</span></p>
-            <div title="The container ID is the ID of the container (or host) that is the helloworld application.">Container ID: HOSTNAME
+            <div title="The container ID is the ID of the container (or host) that is the helloworld application."><?php echo "hostname is:".gethostname(); ?>
             </div>
             <html>  
-  <body>
-    <p><?php echo "hostname is:".gethostname(); ?></p>
-  </body>
 </html>
