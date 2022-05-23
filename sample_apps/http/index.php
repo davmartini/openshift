@@ -87,16 +87,16 @@
     
           <!-- Main jumbotron for a primary marketing message or call to action -->
           <div class="jumbotron" style="text-align:center">
-            <h2 >Bienvenue à cet événement Tech Data</h2>
+            <h2>Bienvenue à cet événement Tech Data</h2>
             <p>OpenShift est plus qu'une plateforme de container, c'est une plateforme cloud-native complète du développement au run</p>
+            <h2><?php echo "Container ID : ".gethostname(); ?></h2>
           </div>
           <div>
-            <img src="images/redhat.png" width="280" height="125"/>
+            <img src="images/redhat.svg" width="280" height="125"/>
           </div> 
           <hr/>
           <div class="footer">
             <p>2022 David Martini,&nbsp;Visits:&nbsp;<span id="visits">&nbsp;</span>,&nbsp;&nbsp;<span id="clock">&nbsp;</span></p>
-            <div title="The container ID is the ID of the container (or host) that is the helloworld application."><?php echo "Container ID : ".gethostname(); ?>
             </div>
             <html>  
 </html>
