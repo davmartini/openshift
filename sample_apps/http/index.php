@@ -91,7 +91,7 @@
             <p>OpenShift est plus qu'une plateforme de container, c'est une plateforme cloud-native complète du développement au run</p>
           </div>
           <div>
-              <p>image</p>
+            <img src="/images/redhat.png" width="280" height="125"/>
           </div> 
           <hr/>
           <div class="footer">
