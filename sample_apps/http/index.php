@@ -92,7 +92,7 @@
             <h3><?php echo "Container ID : ".gethostname(); ?></h3>
           </div>
           <div style="text-align:center">
-            <img src="images/redhat.png" width="320" height="125"/>
+            <img src="images/redhat.png" width="300" height="125"/>
           </div>
           <div style="background-color:red;color:white;text-align:center">
             <p>Paris la Défense</p>
