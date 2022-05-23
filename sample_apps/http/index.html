@@ -1,105 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hello World</title>
 
-   
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="A simple docker helloworld example.">
-        <meta name="author" content="Karthik Gaekwad">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script type="text/javascript">
-    function init ( )
-    {
-      timeDisplay = document.createTextNode ( "" );
-      document.getElementById("clock").appendChild ( timeDisplay );
+<style>
+body {
+  margin: 0px;
+  font: 20px 'RobotoRegular', Arial, sans-serif;
+  font-weight: 100;
+  height: 100%;
+  color: #0f1419;
+}
+div.info {
+  display: table;
+  background: #e8eaec;
+  padding: 20px 20px 20px 20px;
+  border: 1px dashed black;
+  border-radius: 10px;
+  margin: 0px auto auto auto;
+}
+div.info p {
+    display: table-row;
+    margin: 5px auto auto auto;
+}
+div.info p span {
+    display: table-cell;
+    padding: 10px;
+}
+img {
+    width: 176px;
+    margin: 36px auto 36px auto;
+    display:block;
+}
+div.smaller p span {
+    color: #3D5266;
+}
+h1, h2 {
+  font-weight: 100;
+}
+div.check {
+    padding: 0px 0px 0px 0px;
+    display: table;
+    margin: 36px auto auto auto;
+    font: 12px 'RobotoRegular', Arial, sans-serif;
+}
+#footer {
+    position: fixed;
+    bottom: 36px;
+    width: 100%;
+}
+#center {
+    width: 400px;
+    margin: 0 auto;
+    font: 12px Courier;
+}
+</style>
+<script>
+var ref;
+function checkRefresh(){
+    if (document.cookie == "refresh=1") {
+        document.getElementById("check").checked = true;
+        ref = setTimeout(function(){location.reload();}, 1000);
+    } else {
     }
-    
-    function updateVisit ()
-    {
-      visitDisplay = document.createTextNode ( "" );
-      document.getElementById("visits").appendChild(visitDisplay);
-    
-      var counter = Cookies.get('counter');
-      if (counter==null){
-      console.log(counter);
-          counter = 1;
-      }else{
-          counter = Number(counter) + 1;
-      }
-      Cookies.set('counter', counter);
-      document.getElementById("visits").firstChild.nodeValue = counter;
+}
+function changeCookie() {
+    if (document.getElementById("check").checked) {
+        document.cookie = "refresh=1";
+        ref = setTimeout(function(){location.reload();}, 1000);
+    } else {
+        document.cookie = "refresh=0";
+        clearTimeout(ref);
     }
-    
-    function updateClock ()
-    {
-      var currentTime = new Date ( );
-    
-      var currentHours = currentTime.getHours ( );
-      var currentMinutes = currentTime.getMinutes ( );
-      var currentSeconds = currentTime.getSeconds ( );
-    
-      // Pad the minutes and seconds with leading zeros, if required
-      currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
-      currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
-    
-      // Choose either "AM" or "PM" as appropriate
-      var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
-    
-      // Convert the hours component to 12-hour format if needed
-      currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
-    
-      // Convert an hours component of "0" to "12"
-      currentHours = ( currentHours == 0 ) ? 12 : currentHours;
-    
-      // Compose the string for display
-      var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-    
-      // Update the time display
-      document.getElementById("clock").firstChild.nodeValue = currentTimeString;
-    }
-    </script>
-    </head>
-    <body  onload="updateVisit(); updateClock(); setInterval('updateClock()', 1000 )">
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:red;">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">OpenShift Helloworld</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="https://github.com/davmartini/openshift/tree/main/sample_apps/">About</a></li>
-                <li><a href="https://linkedin.com/in/davmartini">Contact</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </nav>
-    
-        <div class="container theme-showcase" role="main">
-    
-          <!-- Main jumbotron for a primary marketing message or call to action -->
-          <div class="jumbotron" style="background-color:grey;">
-            <h2>Bienvenue à cet événement Tech Data</h2>
-            <p>OpenShift est plus qu'une plateforme de container, c'est une plateforme cloud-native complète du développement au run</p>
-          </div>
-          <hr/>
-          <div class="footer">
-            <p>2022 David Martini,&nbsp;Visits:&nbsp;<span id="visits">&nbsp;</span>,&nbsp;&nbsp;<span id="clock">&nbsp;</span></p>
-            <div title="The container ID is the ID of the container (or host) that is the helloworld application.">Container ID: HOSTNAME
-            </div>
-</html>
-<html>
-<body>
-<p>hostname is: $(hostname)</p>
+}
+</script>
+</head>
+<body onload="checkRefresh();">
+<img alt="NGINX Logo" src="./nginx.png"/>
+<div class="info">
+<p><span>Server&nbsp;address:</span> <span>server_address</span></p>
+<p><span>Server&nbsp;name:</span> <span>server_hostname</span></p>
+<p class="smaller"><span>Date:</span> <span>server_date</span></p>
+<p class="smaller"><span>URI:</span> <span>server_url</span></p>
+</div>
+<div class="check"><input type="checkbox" id="check" onchange="changeCookie()"> Auto Refresh</div>
+    <div id="footer">
+        <div id="center" align="center">
+            Request ID: request_id<br/>
+            &copy; NGINX, Inc. 2018
+        </div>
+    </div>
 </body>
 </html>
