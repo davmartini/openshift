@@ -1,34 +1,102 @@
 <html>
-
-<head>
-<title>Hello World!</title>
-</head>
-
-<body>
-
-<?php echo "Hello World!"; ?>
-<?php if($_ENV["HOSTNAME"]) {?><h3>My hostname is <?php echo $_ENV["HOSTNAME"]; ?><br /><br />
-
-<?php $links = [];
-  foreach($_ENV as $key => $value) {
-    if(preg_match("/^(.*)_PORT_([0-9]*)_(TCP|UDP)$/", $key, $matches)) {
-      $links[] = [
-        "name"  => $matches[1],
-        "port"  => $matches[2],
-        "proto" => $matches[3],
-        "value" => $value
-      ];
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A simple docker helloworld example.">
+        <meta name="author" content="Karthik Gaekwad">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script type="text/javascript">
+    function init ( )
+    {
+      timeDisplay = document.createTextNode ( "" );
+      document.getElementById("clock").appendChild ( timeDisplay );
     }
-  }
-
-  if($links) {
-    foreach($links as $link) {
-      echo $link["name"]; ?>  listening on port <?php echo $link["port"]."/".$link["proto"]; ?> available at <?php echo $link["value"]; ?><br /><?php
+    
+    function updateVisit ()
+    {
+      visitDisplay = document.createTextNode ( "" );
+      document.getElementById("visits").appendChild(visitDisplay);
+    
+      var counter = Cookies.get('counter');
+      if (counter==null){
+      console.log(counter);
+          counter = 1;
+      }else{
+          counter = Number(counter) + 1;
+      }
+      Cookies.set('counter', counter);
+      document.getElementById("visits").firstChild.nodeValue = counter;
     }
-  }
-
-}
-?>
-
-</body>
+    
+    function updateClock ()
+    {
+      var currentTime = new Date ( );
+    
+      var currentHours = currentTime.getHours ( );
+      var currentMinutes = currentTime.getMinutes ( );
+      var currentSeconds = currentTime.getSeconds ( );
+    
+      // Pad the minutes and seconds with leading zeros, if required
+      currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+      currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+    
+      // Choose either "AM" or "PM" as appropriate
+      var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+    
+      // Convert the hours component to 12-hour format if needed
+      currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+    
+      // Convert an hours component of "0" to "12"
+      currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+    
+      // Compose the string for display
+      var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+    
+      // Update the time display
+      document.getElementById("clock").firstChild.nodeValue = currentTimeString;
+    }
+    </script>
+    </head>
+    <body  onload="updateVisit(); updateClock(); setInterval('updateClock()', 1000 )">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:red;">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">OpenShift Helloworld</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="https://github.com/davmartini/openshift/tree/main/sample_apps/">About</a></li>
+                <li><a href="https://linkedin.com/in/davmartini">Contact</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+    
+        <div class="container theme-showcase" role="main">
+    
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+          <div class="jumbotron" style="background-color:grey;">
+            <h2>Bienvenue à cet événement Tech Data</h2>
+            <p>OpenShift est plus qu'une plateforme de container, c'est une plateforme cloud-native complète du développement au run</p>
+          </div>
+          <hr/>
+          <div class="footer">
+            <p>2022 David Martini,&nbsp;Visits:&nbsp;<span id="visits">&nbsp;</span>,&nbsp;&nbsp;<span id="clock">&nbsp;</span></p>
+            <div title="The container ID is the ID of the container (or host) that is the helloworld application.">Container ID: HOSTNAME
+            </div>
+            <html>  
+  <body>
+    <p><?php echo "hostname is:".gethostname(); ?></p>
+  </body>
 </html>
