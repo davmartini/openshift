@@ -95,7 +95,7 @@
             <img src="images/redhat.svg" width="280" height="125"/>
           </div>
           <div style="background-color:red">
-            <p>Red Hat</p>
+            <p style="color:white">Paris la Défense</p>
           </div>
           <hr/>
           <div class="footer">
