@@ -23,7 +23,7 @@ Creating service 'fib-knative' in namespace 'kn-demo':
 
 Service 'fib-knative' created to latest revision 'fib-knative-00001' is available at URL:
 https://fib-knative-kn-demo.apps.ocp.drkspace.fr
-````
+```
 
 3. Have a description of Knative service
 ```
