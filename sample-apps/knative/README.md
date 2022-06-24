@@ -10,7 +10,6 @@ oc new-project kn-demo
 2. Deploy the application. We will create a Knative Service named fib-knative which will run our fib-knative image on dockerhub.
 ```
 kn service create fib-knative --image docker.io/ibmcom/fib-knative
-```
 Creating service 'fib-knative' in namespace 'kn-demo':
 
   0.030s The Route is still working to reflect the latest desired specification.
