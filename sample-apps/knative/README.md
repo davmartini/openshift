@@ -1,6 +1,6 @@
 # Demo for OpenShift Serverless
 
-## Deploy our Application to Knative using kn
+## Deploy an application to Knative using kn
 
 1. Create a new space
 ```
@@ -52,3 +52,6 @@ curl -k $MY_APP_URL/50
 curl -k $MY_APP_URL/500
 ```
 
+## Update KN application with new release and manage traffic
+
+[schema](docs/fibknativev2.png)
