@@ -54,4 +54,4 @@ curl -k $MY_APP_URL/500
 
 ## Update KN application with new release and manage traffic
 
-[schema](docs/fibknativev2.png)
+![schema](docs/fibknativev2.png)
